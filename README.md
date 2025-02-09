@@ -13,7 +13,7 @@ Ikuti langkah-langkah berikut untuk menginstal dan menjalankan WorkByte di lingk
 
 ### 1️⃣ Clone Repository
 ```bash
-git clone https://github.com/username/workbyte.git](https://github.com/Aimannawal/SEFEST25WEBDEV_SpeedWin.git workbyte
+git clone https://github.com/Aimannawal/SEFEST25WEBDEV_SpeedWin.git workbyte
 cd workbyte
 ```
 
