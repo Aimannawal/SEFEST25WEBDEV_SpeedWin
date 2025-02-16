@@ -36,102 +36,76 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-6 py-8 mt-20">
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+    <main class="container mx-auto px-6 py-8">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mt-20">
             <div class="p-8">
-                <h1 class="text-3xl font-bold text-workbyte-800 mb-4">Hackathon Web Development</h1>
-                <div class="flex flex-wrap items-center text-workbyte-600 mb-6">
-                    <div class="mr-6 mb-2">
-                        <i data-feather="calendar" class="inline-block mr-2"></i>
-                        <span>Batas: 30 Sept 2024</span>
-                    </div>
-                    <div class="mr-6 mb-2">
-                        <i data-feather="users" class="inline-block mr-2"></i>
-                        <span>Peserta: 120/200</span>
-                    </div>
-                    <div class="mb-2">
-                        <i data-feather="award" class="inline-block mr-2"></i>
-                        <span>Hadiah: $5000</span>
-                    </div>
+                <h1 class="text-3xl font-bold text-workbyte-800 mb-4">{{ $challenge->title }}</h1>
+            <div class="flex flex-wrap items-center text-workbyte-600 mb-6">
+                <div class="mr-6 mb-2">
+                    <i data-feather="calendar" class="inline-block mr-2"></i>
+                    <span>Batas: {{ date('d M Y', strtotime($challenge->end_date)) }}</span>
                 </div>
-                <p class="text-gray-700 mb-6">
-                    Selamat datang di Hackathon Web Development WorkByte! Tantangan ini mengajak Anda untuk menciptakan aplikasi web inovatif yang dapat memecahkan masalah nyata dalam waktu 48 jam. Ini adalah kesempatan Anda untuk menunjukkan kreativitas, keterampilan coding, dan kemampuan problem-solving Anda.
-                </p>
-                <div class="bg-workbyte-100 p-6 rounded-lg mb-6">
-                    <h2 class="text-2xl font-semibold text-workbyte-800 mb-4">Deskripsi Tantangan</h2>
-                    <p class="text-gray-700 mb-4">
-                        Buat aplikasi web yang inovatif dan bermanfaat dalam salah satu kategori berikut:
-                    </p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
-                        <li>Edukasi</li>
-                        <li>Kesehatan</li>
-                        <li>Lingkungan</li>
-                        <li>Produktivitas</li>
-                    </ul>
-                    <p class="text-gray-700">
-                        Aplikasi Anda harus menggunakan teknologi web modern, memiliki UI/UX yang menarik, dan menyelesaikan masalah nyata dalam kategori yang Anda pilih.
-                    </p>
+                <div class="mb-2">
+                    <i data-feather="award" class="inline-block mr-2"></i>
+                    <span>Hadiah: RP {{ $challenge->prize_description }}</span>
                 </div>
-                <div class="bg-workbyte-100 p-6 rounded-lg mb-6">
-                    <h2 class="text-2xl font-semibold text-workbyte-800 mb-4">Kriteria Penilaian</h2>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li>Inovasi dan Kreativitas (30%)</li>
-                        <li>Fungsionalitas dan Kinerja (25%)</li>
-                        <li>Desain UI/UX (20%)</li>
-                        <li>Kode yang Bersih dan Terstruktur (15%)</li>
-                        <li>Presentasi dan Pitch (10%)</li>
-                    </ul>
+            </div>
+            <p class="text-gray-700 mb-6">{{ $challenge->description }}</p>
+            <div class="bg-workbyte-100 p-6 rounded-lg mb-6">
+                <h2 class="text-2xl font-semibold text-workbyte-800 mb-4">Persyaratan</h2>
+                <p class="text-gray-700">{!! nl2br(e($challenge->requirements)) !!}</p>
+            </div>
+            <div class="bg-workbyte-100 p-6 rounded-lg mb-6">
+                <h2 class="text-2xl font-semibold text-workbyte-800 mb-4">Kriteria Penilaian</h2>
+                <p class="text-gray-700">{!! nl2br(e($challenge->evaluation_criteria)) !!}</p>
+            </div>
+            <div class="bg-workbyte-100 p-6 rounded-lg mb-6">
+                <h2 class="text-2xl font-semibold text-workbyte-800 mb-4">Timeline</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li>Mulai: {{ date('d M Y', strtotime($challenge->start_date)) }}</li>
+                    <li>Batas Akhir: {{ date('d M Y', strtotime($challenge->end_date)) }}</li>
+                </ul>
+            </div>
+            <form action="{{ route('challenge.register') }}" method="POST" class="bg-white p-6 rounded-lg border border-workbyte-200">
+                @csrf
+                <h2 class="text-2xl font-semibold text-workbyte-800 mb-4">Daftar Tantangan</h2>
+                
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+            
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 font-medium mb-2">Nama Lengkap</label>
+                    <input type="text" id="name" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-workbyte-500" required>
                 </div>
-                <div class="bg-workbyte-100 p-6 rounded-lg mb-6">
-                    <h2 class="text-2xl font-semibold text-workbyte-800 mb-4">Hadiah</h2>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li>Juara 1: $3000 + Mentoring 3 bulan dengan expert industri</li>
-                        <li>Juara 2: $1500 + Kursus online senilai $500</li>
-                        <li>Juara 3: $500 + Merchandise eksklusif WorkByte</li>
-                    </ul>
+            
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-workbyte-500" required>
                 </div>
-                <div class="bg-workbyte-100 p-6 rounded-lg mb-6">
-                    <h2 class="text-2xl font-semibold text-workbyte-800 mb-4">Timeline</h2>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li>Pendaftaran: 1 Agustus - 29 September 2024</li>
-                        <li>Kickoff Event: 30 September 2024, 09:00 WIB</li>
-                        <li>Periode Hackathon: 30 September 09:00 WIB - 2 Oktober 09:00 WIB</li>
-                        <li>Penjurian: 2-5 Oktober 2024</li>
-                        <li>Pengumuman Pemenang: 6 Oktober 2024</li>
-                    </ul>
+            
+                <div class="mb-4">
+                    <label for="institution" class="block text-gray-700 font-medium mb-2">Asal Instansi</label>
+                    <input type="text" id="institution" name="institution" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-workbyte-500" required>
                 </div>
-                <form class="bg-white p-6 rounded-lg border border-workbyte-200">
-                    <h2 class="text-2xl font-semibold text-workbyte-800 mb-4">Daftar Tantangan</h2>
-                    <div class="mb-4">
-                        <label for="name" class="block text-gray-700 font-medium mb-2">Nama Lengkap</label>
-                        <input type="text" id="name" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-workbyte-500" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
-                        <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-workbyte-500" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="category" class="block text-gray-700 font-medium mb-2">Kategori Pilihan</label>
-                        <select id="category" name="category" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-workbyte-500" required>
-                            <option value="">Pilih kategori</option>
-                            <option value="education">Edukasi</option>
-                            <option value="health">Kesehatan</option>
-                            <option value="environment">Lingkungan</option>
-                            <option value="productivity">Produktivitas</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="experience" class="block text-gray-700 font-medium mb-2">Pengalaman Web Development</label>
-                        <textarea id="experience" name="experience" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-workbyte-500" required></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label class="flex items-center">
-                            <input type="checkbox" class="form-checkbox text-workbyte-600" required>
-                            <span class="ml-2 text-gray-700">Saya setuju dengan <a href="#" class="text-workbyte-600 hover:underline">syarat dan ketentuan</a> tantangan ini.</span>
-                        </label>
-                    </div>
-                    <button type="submit" class="w-full bg-workbyte-600 text-white px-4 py-2 rounded-md hover:bg-workbyte-700 transition duration-300">Daftar Sekarang</button>
-                </form>
+            
+                <div class="mb-4">
+                    <label for="whatsapp_number" class="block text-gray-700 font-medium mb-2">Nomor WhatsApp</label>
+                    <input type="text" id="whatsapp_number" name="whatsapp_number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-workbyte-500" required>
+                </div>
+            
+                <div class="mb-4">
+                    <label for="experience" class="block text-gray-700 font-medium mb-2">Pengalaman Web Development</label>
+                    <textarea id="experience" name="experience" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-workbyte-500" required></textarea>
+                </div>
+            
+                <div class="mb-4">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="form-checkbox text-workbyte-600" required>
+                        <span class="ml-2 text-gray-700">Saya setuju dengan <a href="#" class="text-workbyte-600 hover:underline">syarat dan ketentuan</a> tantangan ini.</span>
+                    </label>
+                </div>
+            
+                <button type="submit" class="w-full bg-workbyte-600 text-white px-4 py-2 rounded-md hover:bg-workbyte-700 transition duration-300">Daftar Sekarang</button>
+            </form>
             </div>
         </div>
     </main>

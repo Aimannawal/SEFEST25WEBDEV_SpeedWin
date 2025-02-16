@@ -21,87 +21,86 @@
                     <a href="/challenge" class="text-workbyte-600 hover:text-workbyte-800 transition duration-300">Tantangan</a>
                     <a href="/jobs" class="text-workbyte-600 hover:text-workbyte-800 transition duration-300">Cari Kerja</a>
                 </div>
-                <div class="hidden md:flex space-x-4">
-                    <a href="{{ route('login') }}" class="bg-workbyte-100 text-workbyte-600 px-6 py-2 rounded hover:bg-workbyte-200 transition duration-300">Login</a>
-                    <a href="{{ route('register') }}" class="bg-workbyte-600 text-white px-6 py-2 rounded hover:bg-workbyte-700 transition duration-300">Daftar</a>
+                <div class="hidden md:flex items-center space-x-4">
+                    @auth
+                        <div class="relative">
+                            <button class="flex items-center text-workbyte-600 hover:text-workbyte-800 focus:outline-none">
+                                <span>{{ Auth::user()->name }}</span>
+                                <i data-feather="chevron-down" class="ml-2"></i>
+                            </button>
+                            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 hidden">
+                                <a href="/profile" class="block px-4 py-2 text-sm text-workbyte-600 hover:bg-workbyte-100">Profile</a>
+                                <form action="{{ route('logout') }}" method="POST" class="mt-2">
+                                    @csrf
+                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-100">Logout</button>
+                                </form>
+                            </div>
+                        </div>
+                    @else
+                        <a href="{{ route('login') }}" class="bg-workbyte-100 text-workbyte-600 px-6 py-2 rounded hover:bg-workbyte-200 transition duration-300">Login</a>
+                        <a href="{{ route('register') }}" class="bg-workbyte-600 text-white px-6 py-2 rounded hover:bg-workbyte-700 transition duration-300">Daftar</a>
+                    @endauth
                 </div>
                 <div class="md:hidden">
-                    <button class="text-workbyte-600 hover:text-workbyte-800">
+                    <button class="text-workbyte-600 hover:text-workbyte-800 focus:outline-none" onclick="toggleMobileMenu()">
                         <i data-feather="menu"></i>
                     </button>
                 </div>
             </div>
         </div>
-    </nav>    
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white" id="mobileMenu">
+            <div class="px-6 py-4">
+                <a href="/learn" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Belajar</a>
+                <a href="/challenge" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Tantangan</a>
+                <a href="/jobs" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Cari Kerja</a>
+                @auth
+                    <a href="/profile" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Profile</a>
+                    <form action="{{ route('logout') }}" method="POST" class="mt-2">
+                        @csrf
+                        <button type="submit" class="block w-full text-left text-red-500 hover:text-red-700 py-2">Logout</button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Login</a>
+                    <a href="{{ route('register') }}" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Daftar</a>
+                @endauth
+            </div>
+        </div>
+    </nav>   
 
     <div class="container mx-auto px-6 py-8">
         <h1 class="text-4xl font-bold text-workbyte-800 mb-8 mt-12">Tantangan WorkByte</h1>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="p-6">
-                    <h2 class="text-xl font-semibold text-workbyte-800 mb-2">Hackathon Web Development</h2>
-                    <p class="text-gray-600 mb-4">Buat aplikasi web inovatif dalam waktu 48 jam.</p>
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-workbyte-600 font-semibold">Hadiah: $5000</span>
-                        <span class="text-gray-500">Batas: 30 Sept 2024</span>
-                    </div>
-                    <a href="#" class="bg-workbyte-600 text-white px-4 py-2 rounded hover:bg-workbyte-700 transition duration-300 block text-center">Ikuti Tantangan</a>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="p-6">
-                    <h2 class="text-xl font-semibold text-workbyte-800 mb-2">UI/UX Design Challenge</h2>
-                    <p class="text-gray-600 mb-4">Rancang UI/UX yang menarik untuk platform edukasi.</p>
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-workbyte-600 font-semibold">Hadiah: $3000</span>
-                        <span class="text-gray-500">Batas: 15 Okt 2024</span>
-                    </div>
-                    <a href="#" class="bg-workbyte-600 text-white px-4 py-2 rounded hover:bg-workbyte-700 transition duration-300 block text-center">Ikuti Tantangan</a>
-                </div>
-            </div>
-        </div>
     
-        <div class="mt-12">
-            <h2 class="text-3xl font-bold text-workbyte-800 mb-6">Leaderboard</h2>
+        <form action="{{ route('challenges.index') }}" method="GET" class="flex flex-wrap gap-4 mb-8">
+            <input type="text" name="keyword" placeholder="Cari tantangan..." value="{{ request('keyword') }}" class="flex-grow px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-workbyte-600">
+            <select name="type" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-workbyte-600">
+                <option value="">Semua Kategori</option>
+                <option value="Graphic Design" {{ request('category') == 'Graphic Design' ? 'selected' : '' }}>Graphic Design</option>
+                    <option value="Web Development" {{ request('category') == 'Web Development' ? 'selected' : '' }}>Web Development</option>
+                    <option value="Frontend Development" {{ request('category') == 'Frontend Development' ? 'selected' : '' }}>Frontend Development</option>
+                    <option value="Devops" {{ request('category') == 'Devops' ? 'selected' : '' }}>DevOps</option>
+                    <option value="Backend Development" {{ request('category') == 'Backend Development' ? 'selected' : '' }}>Backend Development</option>
+                    <option value="Full Stack Development" {{ request('category') == 'Full Stack Development' ? 'selected' : '' }}>Full Stack Development</option>
+                    <option value="Mobile App Development" {{ request('category') == 'Mobile App Development' ? 'selected' : '' }}>Mobile App Development</option>
+                    <option value="UI/UX" {{ request('category') == 'UI/UX' ? 'selected' : '' }}>UI/UX</option>
+            </select>
+            <button type="submit" class="bg-workbyte-600 text-white px-6 py-2 rounded-lg hover:bg-workbyte-700 transition duration-300">Cari</button>
+        </form>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach($challenges as $challenge)
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <table class="w-full">
-                    <thead>
-                        <tr class="bg-workbyte-100 text-workbyte-800">
-                            <th class="py-3 px-6 text-left">Peringkat</th>
-                            <th class="py-3 px-6 text-left">Nama</th>
-                            <th class="py-3 px-6 text-left">Skor</th>
-                            <th class="py-3 px-6 text-left">Badge</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b border-gray-200">
-                            <td class="py-4 px-6">1</td>
-                            <td class="py-4 px-6">Rizky Pratama</td>
-                            <td class="py-4 px-6">980</td>
-                            <td class="py-4 px-6">
-                                <span class="inline-block bg-workbyte-100 text-workbyte-800 rounded-full px-3 py-1 text-sm font-semibold mr-2">Champion</span>
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-200">
-                            <td class="py-4 px-6">2</td>
-                            <td class="py-4 px-6">Dewi Lestari</td>
-                            <td class="py-4 px-6">920</td>
-                            <td class="py-4 px-6">
-                                <span class="inline-block bg-workbyte-100 text-workbyte-800 rounded-full px-3 py-1 text-sm font-semibold mr-2">Master</span>
-                            </td>
-                        </tr>
-                        <tr class="border-b border-gray-200">
-                            <td class="py-4 px-6">3</td>
-                            <td class="py-4 px-6">Budi Santoso</td>
-                            <td class="py-4 px-6">870</td>
-                            <td class="py-4 px-6">
-                                <span class="inline-block bg-workbyte-100 text-workbyte-800 rounded-full px-3 py-1 text-sm font-semibold mr-2">Expert</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="p-6">
+                    <h2 class="text-xl font-semibold text-workbyte-800 mb-2">{{ $challenge->title }}</h2>
+                    <p class="text-gray-600 mb-4">{{ Str::limit($challenge->description, 100) }}</p>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-workbyte-600 font-semibold">Hadiah: {{ $challenge->prize_description }}</span>
+                        <span class="text-gray-500">Batas: {{ date('d M Y', strtotime($challenge->end_date)) }}</span>
+                    </div>
+                    <a href="{{ route('challenges.show', $challenge->id) }}" class="bg-workbyte-600 text-white px-4 py-2 rounded hover:bg-workbyte-700 transition duration-300 block text-center">Ikuti Tantangan</a>
+                </div>
             </div>
+            @endforeach
         </div>
     </div>
     
@@ -161,7 +160,28 @@
     </footer>
 
     <script>
-        feather.replace()
-    </script>
+        function toggleMobileMenu() {
+       const mobileMenu = document.getElementById('mobileMenu');
+       mobileMenu.classList.toggle('hidden');
+   }
+
+   // Feather Icons
+   feather.replace();
+
+   // Dropdown Menu
+   const dropdownButton = document.querySelector('.relative button');
+   const dropdownMenu = document.querySelector('.relative .hidden');
+
+   dropdownButton.addEventListener('click', () => {
+       dropdownMenu.classList.toggle('hidden');
+   });
+
+   // Close dropdown when clicking outside
+   document.addEventListener('click', (event) => {
+       if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+           dropdownMenu.classList.add('hidden');
+       }
+   });
+   </script>
 </body>
 </html>

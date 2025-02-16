@@ -36,8 +36,14 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-6 py-8 mt-20">
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+    @if(session('success'))
+            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
+        
+    <main class="container mx-auto px-6 py-8">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden mt-20">
             <div class="p-8">
                 <div class="flex items-center justify-center mb-6">
                     <div class="bg-green-100 rounded-full p-3">
@@ -97,8 +103,8 @@
                 </div>
 
                 <div class="text-center">
-                    <a href="/dashboard" class="inline-block bg-workbyte-600 text-white px-6 py-3 rounded-lg hover:bg-workbyte-700 transition duration-300 mb-4">
-                        Lihat Dashboard Saya
+                    <a href="/" class="inline-block bg-workbyte-600 text-white px-6 py-3 rounded-lg hover:bg-workbyte-700 transition duration-300 mb-4">
+                        Kembali ke Halaman Utama
                     </a>
                     <p class="text-gray-600">
                         Jika Anda memiliki pertanyaan, silakan hubungi kami di <a href="mailto:support@workbyte.com" class="text-workbyte-600 hover:underline">support@workbyte.com</a>

@@ -15,7 +15,7 @@
         <div class="container mx-auto px-6 py-3">
             <div class="flex justify-between items-center">
                 <div class="text-2xl font-bold text-workbyte-600">
-                    Work<span class="text-workbyte-400">Byte</span>
+                    <a href="/">Work<span class="text-workbyte-400">Byte</span></a>
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#" class="text-workbyte-600 hover:text-workbyte-800 transition duration-300">Kursus Saya</a>

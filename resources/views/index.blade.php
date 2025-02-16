@@ -21,18 +21,52 @@
                     <a href="/challenge" class="text-workbyte-600 hover:text-workbyte-800 transition duration-300">Tantangan</a>
                     <a href="/jobs" class="text-workbyte-600 hover:text-workbyte-800 transition duration-300">Cari Kerja</a>
                 </div>
-                <div class="hidden md:flex space-x-4">
-                    <a href="{{ route('login') }}" class="bg-workbyte-100 text-workbyte-600 px-6 py-2 rounded hover:bg-workbyte-200 transition duration-300">Login</a>
-                    <a href="{{ route('register') }}" class="bg-workbyte-600 text-white px-6 py-2 rounded hover:bg-workbyte-700 transition duration-300">Daftar</a>
+                <div class="hidden md:flex items-center space-x-4">
+                    @auth
+                        <div class="relative">
+                            <button class="flex items-center text-workbyte-600 hover:text-workbyte-800 focus:outline-none">
+                                <span>{{ Auth::user()->name }}</span>
+                                <i data-feather="chevron-down" class="ml-2"></i>
+                            </button>
+                            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 hidden">
+                                <a href="/profile" class="block px-4 py-2 text-sm text-workbyte-600 hover:bg-workbyte-100">Profile</a>
+                                <form action="{{ route('logout') }}" method="POST" class="mt-2">
+                                    @csrf
+                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-100">Logout</button>
+                                </form>
+                            </div>
+                        </div>
+                    @else
+                        <a href="{{ route('login') }}" class="bg-workbyte-100 text-workbyte-600 px-6 py-2 rounded hover:bg-workbyte-200 transition duration-300">Login</a>
+                        <a href="{{ route('register') }}" class="bg-workbyte-600 text-white px-6 py-2 rounded hover:bg-workbyte-700 transition duration-300">Daftar</a>
+                    @endauth
                 </div>
                 <div class="md:hidden">
-                    <button class="text-workbyte-600 hover:text-workbyte-800">
+                    <button class="text-workbyte-600 hover:text-workbyte-800 focus:outline-none" onclick="toggleMobileMenu()">
                         <i data-feather="menu"></i>
                     </button>
                 </div>
             </div>
         </div>
-    </nav>    
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white" id="mobileMenu">
+            <div class="px-6 py-4">
+                <a href="/learn" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Belajar</a>
+                <a href="/challenge" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Tantangan</a>
+                <a href="/jobs" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Cari Kerja</a>
+                @auth
+                    <a href="/profile" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Profile</a>
+                    <form action="{{ route('logout') }}" method="POST" class="mt-2">
+                        @csrf
+                        <button type="submit" class="block w-full text-left text-red-500 hover:text-red-700 py-2">Logout</button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Login</a>
+                    <a href="{{ route('register') }}" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Daftar</a>
+                @endauth
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
     <header class="pt-24 pb-12 md:pt-32 md:pb-20">
@@ -43,7 +77,7 @@
                         Belajar, Tantangan, dan <span class="text-workbyte-600">Cari Kerja</span> dalam Satu Platform
                     </h1>
                     <p class="text-xl text-gray-600 mb-8">Tingkatkan keterampilan, hadapi tantangan, dan temukan peluang karir impian Anda di industri teknologi.</p>
-                    <a href="#" class="bg-workbyte-600 text-white px-8 py-3 rounded text-lg font-semibold hover:bg-workbyte-700 transition duration-300 transform hover:scale-105 inline-flex items-center">
+                    <a href="/login" class="bg-workbyte-600 text-white px-8 py-3 rounded text-lg font-semibold hover:bg-workbyte-700 transition duration-300 transform hover:scale-105 inline-flex items-center">
                         Mulai Sekarang
                         <i data-feather="arrow-right" class="ml-2"></i>
                     </a>
@@ -149,7 +183,28 @@
     </footer>
 
     <script>
-        feather.replace()
+         function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenu.classList.toggle('hidden');
+    }
+
+    // Feather Icons
+    feather.replace();
+
+    // Dropdown Menu
+    const dropdownButton = document.querySelector('.relative button');
+    const dropdownMenu = document.querySelector('.relative .hidden');
+
+    dropdownButton.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('hidden');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (event) => {
+        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.add('hidden');
+        }
+    });
     </script>
 </body>
 </html>

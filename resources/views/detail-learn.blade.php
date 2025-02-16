@@ -7,30 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        workbyte: {
-                            100: '#E6F7FF',
-                            200: '#BAE7FF',
-                            300: '#91D5FF',
-                            400: '#69C0FF',
-                            500: '#40A9FF',
-                            600: '#1890FF',
-                            700: '#096DD9',
-                            800: '#0050B3',
-                            900: '#003A8C',
-                        },
-                    },
-                    fontFamily: {
-                        'poppins': ['Poppins', 'sans-serif'],
-                    },
-                },
-            },
-        }
-    </script>
+    @vite('resources/css/app.css')
 </head>
 <body class="font-poppins bg-gradient-to-br from-workbyte-100 to-workbyte-200 min-h-screen">
     <!-- Navbar -->
@@ -61,7 +38,7 @@
     <!-- Main Content -->
     <main class="container mx-auto px-6 py-8">
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img src="https://via.placeholder.com/1200x400" alt="Course Cover" class="w-full h-64 object-cover">
+            <img src="assets/download.jpg" alt="Course Cover" class="w-full h-64 object-cover">
             <div class="p-8">
                 <h1 class="text-3xl font-bold text-workbyte-800 mb-4">Pemrograman Web dengan React</h1>
                 <div class="flex items-center text-workbyte-600 mb-4">
@@ -94,7 +71,7 @@
                         <span class="text-3xl font-bold text-workbyte-600">Rp 1.500.000</span>
                         <span class="text-gray-600 ml-2">/ Akses Seumur Hidup</span>
                     </div>
-                    <a href="#" class="bg-workbyte-600 text-white px-8 py-3 rounded-lg hover:bg-workbyte-700 transition duration-300 text-lg font-semibold w-full md:w-auto text-center">
+                    <a href="/course" class="bg-workbyte-600 text-white px-8 py-3 rounded-lg hover:bg-workbyte-700 transition duration-300 text-lg font-semibold w-full md:w-auto text-center">
                         Mulai Belajar
                     </a>
                 </div>
@@ -105,12 +82,12 @@
         <div class="mt-12 bg-white rounded-lg shadow-lg p-8">
             <h2 class="text-2xl font-semibold text-workbyte-800 mb-6">Instruktur</h2>
             <div class="flex items-center">
-                <img src="https://via.placeholder.com/100" alt="Instructor" class="w-20 h-20 rounded-full mr-6">
+                <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Instructor" class="w-20 h-20 rounded-full mr-6">
                 <div>
-                    <h3 class="text-xl font-semibold text-workbyte-700">John Doe</h3>
+                    <h3 class="text-xl font-semibold text-workbyte-700">Masyhudi Affandi</h3>
                     <p class="text-gray-600">Senior Web Developer & Instructor</p>
                     <p class="mt-2 text-gray-700">
-                        John adalah seorang pengembang web berpengalaman dengan lebih dari 10 tahun di industri. 
+                        Masyhudi adalah seorang pengembang web berpengalaman dengan lebih dari 10 tahun di industri. 
                         Ia telah mengajar ribuan siswa dan memiliki passion dalam berbagi pengetahuan tentang teknologi web terbaru.
                     </p>
                 </div>

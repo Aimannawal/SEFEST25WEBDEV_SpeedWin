@@ -29,7 +29,7 @@ class AuthController extends Controller
             return match ($user->role) {
                 2 => redirect('/super-admin/dashboard'),
                 1 => redirect('/admin/dashboard'),
-                default => redirect('/user/dashboard'),
+                default => redirect('/'),
             };
         }
 
@@ -68,7 +68,7 @@ class AuthController extends Controller
         return match ($user->role) {
             2 => redirect('/super-admin/dashboard'),
             1 => redirect('/admin/dashboard'),
-            default => redirect('/user/dashboard'),
+            default => redirect('/'),
         };
     }
   
