@@ -1,12 +1,3 @@
-# 🚀 WorkByte
-
-WorkByte adalah platform yang memungkinkan pengguna untuk mencari pekerjaan, belajar, dan menghadapi tantangan baru untuk meningkatkan keterampilan mereka. 🎯
-
-## 🔥 Fitur Utama
-- 🏢 **Pencarian Kerja**: Temukan berbagai lowongan pekerjaan yang sesuai dengan keahlian Anda.
-- 📚 **Pembelajaran**: Akses berbagai course dan tantangan untuk meningkatkan keterampilan.
-- 🎯 **Tantangan**: Selesaikan tantangan dari perusahaan atau komunitas untuk mendapatkan pengalaman.
-
 ## 🛠 Instalasi
 
 Ikuti langkah-langkah berikut untuk menginstal dan menjalankan WorkByte di lingkungan lokal Anda:
@@ -34,11 +25,18 @@ php artisan key:generate
 ```
 
 ### 4️⃣ Migrasi Database & Seeding
+Jalankan migrasi database dan seeding untuk mengisi data dummy:
 ```bash
 php artisan migrate --seed
 ```
 
-### 5️⃣ Menjalankan Aplikasi
+### 5️⃣ Storage Link
+Jalankan perintah ini untuk membuat symbolic link untuk akses file storage:
+```bash
+php artisan storage:link
+```
+
+### 6️⃣ Menjalankan Aplikasi
 🚀 Jalankan Tailwind CSS dan server Laravel:
 ```bash
 npm run dev
@@ -46,3 +44,14 @@ php artisan serve
 ```
 
 🎉 Aplikasi sekarang dapat diakses di `http://127.0.0.1:8000`.
+
+---
+
+### 📧 Informasi Akun
+- **Admin**  
+  - Email: `admin@gmail.com`  
+  - Password: `12345678`
+
+- **User**  
+  - Email: `user@gmail.com`  
+  - Password: `12345678`
