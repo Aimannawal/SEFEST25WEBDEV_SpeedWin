@@ -21,5 +21,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(UsersSeeder::class);
+        $this->call(ChallengeSeeder::class);
+        $this->call(JobSeeder::class);
+        $this->call(JobApplicationSeeder::class);
+        $this->call(LearnCourseSeeder::class);
+        $this->call(ChallengeRegistrationSeeder::class);
     }
 }
