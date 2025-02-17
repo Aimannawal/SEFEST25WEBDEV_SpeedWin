@@ -13,32 +13,61 @@ class UsersSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'password' => bcrypt('12345678'),
-            'role' => 2,
-        ]);
-
-        User::create([
-            'name' => 'Aiman Wafi\'i',
-            'email' => 'aiman@gmail.com',
             'password' => Hash::make('12345678'),
             'role' => 1,
-            'industry' => 'Information Technology',
-            'description' => 'TechCorp Solutions is a leading provider of innovative technology solutions.',
-            'website' => 'https://www.techcorpsolutions.com',
-            'founded_year' => 2010,
-            'company_size' => '51-200',
-            'headquarters' => 'San Francisco, CA',
-            'company_logo' => 'default.png', 
-            'linkedin' => 'https://www.linkedin.com/company/techcorp-solutions',
-            'twitter' => 'https://twitter.com/techcorpsolutions',
-            'facebook' => 'https://www.facebook.com/techcorpsolutions',
-        ]);
+            'industry' => 'Technology & Business',
+            'description' => 'Admin of workbyte, managing platform operations and user experience.',
+            'website' => 'https://www.workbyte.com',
+            'founded_year' => 2024,
+            'company_size' => '1-10',
+            'headquarters' => 'Jakarta, Indonesia',
+            'company_logo' => 'admin_default.png', 
+            'linkedin' => 'https://www.linkedin.com/company/workbyte',
+            'twitter' => 'https://twitter.com/workbyte',
+            'facebook' => 'https://www.facebook.com/workbyte',
+        ]);        
 
         User::create([
             'name' => 'User',
             'email' => 'user@gmail.com',
             'password' => bcrypt('12345678'),
             'role' => 0,
+        ]);
+
+        User::create( [
+            'name' => 'Aiman Wafi\'i',
+            'email' => 'aiman@gmail.com',
+            'password' => Hash::make('12345678'),
+            'role' => 0, 
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        User::create( [
+            'name' => 'Budi Santoso',
+            'email' => 'budi.santoso@gmail.com',
+            'password' => Hash::make('12345678'),
+            'role' => 0, 
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        User::create([
+            'name' => 'Siti Rahma',
+            'email' => 'siti.rahma@gmail.com',
+            'password' => Hash::make('12345678'),
+            'role' => 0, 
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        User::create([
+            'name' => 'Rizky Pratama',
+            'email' => 'rizky.pratama@gmail.com',
+            'password' => Hash::make('12345678'),
+            'role' => 0, 
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }
