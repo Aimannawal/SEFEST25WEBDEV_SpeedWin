@@ -66,7 +66,7 @@
                 @endauth
             </div>
         </div>
-    </nav>   
+    </nav> 
 
     <div class="container mx-auto px-6 py-8">
         <h1 class="text-4xl font-bold text-workbyte-800 mb-8 mt-12">Tantangan WorkByte</h1>

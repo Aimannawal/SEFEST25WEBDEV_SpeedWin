@@ -11,28 +11,60 @@
 </head>
 <body class="font-poppins bg-gray-100 min-h-screen flex flex-col">
     <!-- Navbar -->
-    <nav class="bg-white shadow-md">
+    <nav class="bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg fixed w-full z-10">
         <div class="container mx-auto px-6 py-3">
             <div class="flex justify-between items-center">
                 <div class="text-2xl font-bold text-workbyte-600">
-                    <a href="/">Work<span class="text-workbyte-400">Byte</span></a>
+                    Work<span class="text-workbyte-400">Byte</span>
                 </div>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#" class="text-workbyte-600 hover:text-workbyte-800 transition duration-300">Kursus Saya</a>
-                    <a href="#" class="text-workbyte-600 hover:text-workbyte-800 transition duration-300">Tantangan</a>
-                    <a href="#" class="text-workbyte-600 hover:text-workbyte-800 transition duration-300">Forum</a>
+                    <a href="/learn" class="text-workbyte-600 hover:text-workbyte-800 transition duration-300">Belajar</a>
+                    <a href="/challenge" class="text-workbyte-600 hover:text-workbyte-800 transition duration-300">Tantangan</a>
+                    <a href="/jobs" class="text-workbyte-600 hover:text-workbyte-800 transition duration-300">Cari Kerja</a>
                 </div>
                 <div class="hidden md:flex items-center space-x-4">
-                    <button class="text-workbyte-600 hover:text-workbyte-800">
-                        <i data-feather="bell"></i>
-                    </button>
-                    <img src="https://via.placeholder.com/40" alt="User Avatar" class="w-10 h-10 rounded-full">
+                    @auth
+                        <div class="relative">
+                            <button class="flex items-center text-workbyte-600 hover:text-workbyte-800 focus:outline-none">
+                                <span>{{ Auth::user()->name }}</span>
+                                <i data-feather="chevron-down" class="ml-2"></i>
+                            </button>
+                            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 hidden">
+                                <a href="/profile" class="block px-4 py-2 text-sm text-workbyte-600 hover:bg-workbyte-100">Profile</a>
+                                <form action="{{ route('logout') }}" method="POST" class="mt-2">
+                                    @csrf
+                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-100">Logout</button>
+                                </form>
+                            </div>
+                        </div>
+                    @else
+                        <a href="{{ route('login') }}" class="bg-workbyte-100 text-workbyte-600 px-6 py-2 rounded hover:bg-workbyte-200 transition duration-300">Login</a>
+                        <a href="{{ route('register') }}" class="bg-workbyte-600 text-white px-6 py-2 rounded hover:bg-workbyte-700 transition duration-300">Daftar</a>
+                    @endauth
                 </div>
                 <div class="md:hidden">
-                    <button class="text-workbyte-600 hover:text-workbyte-800">
+                    <button class="text-workbyte-600 hover:text-workbyte-800 focus:outline-none" onclick="toggleMobileMenu()">
                         <i data-feather="menu"></i>
                     </button>
                 </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white" id="mobileMenu">
+            <div class="px-6 py-4">
+                <a href="/learn" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Belajar</a>
+                <a href="/challenge" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Tantangan</a>
+                <a href="/jobs" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Cari Kerja</a>
+                @auth
+                    <a href="/profile" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Profile</a>
+                    <form action="{{ route('logout') }}" method="POST" class="mt-2">
+                        @csrf
+                        <button type="submit" class="block w-full text-left text-red-500 hover:text-red-700 py-2">Logout</button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Login</a>
+                    <a href="{{ route('register') }}" class="block text-workbyte-600 hover:text-workbyte-800 py-2">Daftar</a>
+                @endauth
             </div>
         </div>
     </nav>
