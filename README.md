@@ -1,5 +1,3 @@
----
-
 ## 🛠 Instalasi
 
 Ikuti langkah-langkah berikut untuk menginstal dan menjalankan WorkByte di lingkungan lokal Anda:
@@ -57,5 +55,3 @@ php artisan serve
 - **User**  
   - Email: `user@gmail.com`  
   - Password: `12345678`
-
-Dengan informasi akun ini, Anda bisa login sebagai admin untuk mengelola data atau sebagai user untuk mencari pekerjaan dan belajar.
