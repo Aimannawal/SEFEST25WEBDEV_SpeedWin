@@ -203,8 +203,29 @@
     </footer>
 
     <script>
-        feather.replace()
-    </script>
+        function toggleMobileMenu() {
+       const mobileMenu = document.getElementById('mobileMenu');
+       mobileMenu.classList.toggle('hidden');
+   }
+
+   // Feather Icons
+   feather.replace();
+
+   // Dropdown Menu
+   const dropdownButton = document.querySelector('.relative button');
+   const dropdownMenu = document.querySelector('.relative .hidden');
+
+   dropdownButton.addEventListener('click', () => {
+       dropdownMenu.classList.toggle('hidden');
+   });
+
+   // Close dropdown when clicking outside
+   document.addEventListener('click', (event) => {
+       if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+           dropdownMenu.classList.add('hidden');
+       }
+   });
+   </script>
 </body>
 </html>
 
