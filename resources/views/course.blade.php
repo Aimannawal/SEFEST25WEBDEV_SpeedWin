@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>WorkByte - Pemrograman Web dengan React</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
     @vite('resources/css/app.css')
+
+
 </head>
 <body class="font-poppins bg-gray-100 min-h-screen flex flex-col">
     <!-- Navbar -->
@@ -176,6 +179,38 @@
         </main>
     </div>
 
+<!-- Chat Button -->
+<div id="chatButton" class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleChat()" class="w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-110">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+    </button>
+</div>
+
+<!-- Chat Window -->
+<div id="chatWindow" class="fixed bottom-24 right-6 w-80 md:w-96 bg-white rounded-lg shadow-2xl z-50 transition-all duration-500 ease-in-out transform translate-y-full opacity-0 scale-95">
+    <div class="p-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-t-lg flex justify-between items-center">
+        <span class="text-lg">WorkBot</span>
+        <button onclick="toggleChat()" class="text-white hover:text-gray-200 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+    <div id="chatMessages" class="p-4 h-80 overflow-y-auto text-sm text-gray-800 space-y-4"></div>
+    <div class="p-4 border-t border-gray-200">
+        <form onsubmit="sendMessage(event)" class="flex space-x-2">
+            <input type="text" id="chatInput" placeholder="Type your message..." class="flex-grow p-2 border border-gray-300 rounded-l-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
+        </form>
+    </div>
+</div>
+
     <!-- Footer -->
     <footer class="bg-workbyte-900 text-white py-6">
         <div class="container mx-auto px-6">
@@ -241,7 +276,75 @@
                 feather.replace();
             });
         });
+
+
+    function toggleChat() {
+        const chatWindow = document.getElementById('chatWindow');
+        chatWindow.classList.toggle('translate-y-full');
+        chatWindow.classList.toggle('opacity-0');
+        chatWindow.classList.toggle('scale-95');
+    }
+
+    async function sendMessage(event) {
+    event.preventDefault();
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+    const message = chatInput.value.trim();
+
+    if (message === '') return;
+
+    // Display user message
+    appendMessage('You', message, 'user');
+    chatInput.value = '';
+
+    // Display loading animation
+    const loadingElement = appendMessage('WorkBot', '<span class="animate-pulse">Thinking...</span>', 'bot');
+
+    // Define default context
+    const defaultContext = 'You are WorkBot, an AI assistant designed to help with tasks related to work. Always provide clear and concise answers based on the task at hand.';
+
+    // Send message to server
+    try {
+        const response = await fetch('{{ route('chatbot.send') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            },
+            body: JSON.stringify({
+                prompt: message,
+                context: defaultContext, // Add the default context here
+            }),
+        });
+
+        const data = await response.json();
+
+        // Remove loading animation and display reply
+        loadingElement.remove();
+        appendMessage('WorkBot', data.reply, 'bot');
+    } catch (error) {
+        console.error('Error:', error);
+        loadingElement.remove();
+        appendMessage('Error', 'An error occurred while sending the message.', 'error');
+    }
+}
+
+function appendMessage(sender, content, type) {
+    const chatMessages = document.getElementById('chatMessages');
+    const messageElement = document.createElement('div');
+    messageElement.className = `p-2 rounded-lg ${type === 'user' ? 'bg-blue-100 ml-auto' : type === 'error' ? 'bg-red-100' : 'bg-gray-100'} max-w-[80%]`;
+    messageElement.innerHTML = `
+        <p class="font-semibold ${type === 'user' ? 'text-blue-800' : type === 'error' ? 'text-red-800' : 'text-gray-800'}">${sender}</p>
+        <p class="${type === 'user' ? 'text-blue-600' : type === 'error' ? 'text-red-600' : 'text-gray-600'}">${content}</p>
+    `;
+    chatMessages.appendChild(messageElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return messageElement;
+}
+
     </script>
+
+    
 </body>
 </html>
 

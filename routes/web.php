@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChallengeController;
+use App\Http\Controllers\ChatBotController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\LearnController;
@@ -101,3 +102,6 @@ Route::post('/job-apply', [UserJobController::class, 'store'])->name('job.apply'
 Route::get('/detail-jobs', function () {
     return view('detail-jobs');
 });
+
+
+Route::post('/chatbot/send', [ChatBotController::class, 'sendMessage'])->name('chatbot.send');
