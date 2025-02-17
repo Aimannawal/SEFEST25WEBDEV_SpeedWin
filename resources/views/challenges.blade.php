@@ -88,7 +88,7 @@
         </form>
     
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @foreach($challenges as $challenge)
+            @forelse($challenges as $challenge)
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="p-6">
                     <h2 class="text-xl font-semibold text-workbyte-800 mb-2">{{ $challenge->title }}</h2>
@@ -100,7 +100,11 @@
                     <a href="{{ route('challenges.show', $challenge->id) }}" class="bg-workbyte-600 text-white px-4 py-2 rounded hover:bg-workbyte-700 transition duration-300 block text-center">Ikuti Tantangan</a>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center">
+                <p class="text-gray-600">Maaf, tantangan belum tersedia.</p>
+            </div>
+            @endforelse
         </div>
     </div>
     
