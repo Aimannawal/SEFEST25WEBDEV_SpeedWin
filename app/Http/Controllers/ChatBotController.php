@@ -17,7 +17,7 @@ class ChatBotController extends Controller
         $prompt = $request->input('prompt');
 
         // Koneksi dengan default context
-        $defaultContext = 'You are WorkBot, an AI assistant designed to help with tasks related to work. Always provide clear and concise answers based on the task at hand.';
+        $defaultContext = 'Anda adalah WorkBot, asisten AI yang dirancang untuk membantu calon pekerja untuk belajar di platform WorkByte. Selalu berikan jawaban yang jelas dan ringkas berdasarkan tugas yang diberikan.';
 
         // Gabungkan default context dengan prompt
         $fullPrompt = $defaultContext . "\n\n" . $prompt;
