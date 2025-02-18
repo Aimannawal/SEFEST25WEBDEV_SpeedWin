@@ -82,36 +82,54 @@
                 <div class="space-y-2">
                     <div>
                         <button class="flex items-center justify-between w-full text-left p-2 rounded hover:bg-workbyte-100">
-                            <span class="text-workbyte-700">1. Pengenalan React</span>
+                            <span class="text-workbyte-700">1. Pengenalan Laravel</span>
                             <i data-feather="chevron-down" class="w-4 h-4 text-workbyte-600"></i>
                         </button>
                         <div class="ml-4 mt-2 space-y-1">
-                            <a href="#" class="block p-2 rounded text-workbyte-600 hover:bg-workbyte-100">1.1 Apa itu React?</a>
-                            <a href="#" class="block p-2 rounded text-workbyte-600 hover:bg-workbyte-100">1.2 Setting up environment</a>
-                            <a href="#" class="block p-2 rounded bg-workbyte-200 text-workbyte-800">1.3 Membuat aplikasi pertama</a>
+                            <a href="#" class="block p-2 rounded text-workbyte-600 hover:bg-workbyte-100">1.1 Apa itu Laravel?</a>
+                            <a href="#" class="block p-2 rounded text-workbyte-600 hover:bg-workbyte-100">1.2 Instalasi dan konfigurasi</a>
+                            <a href="#" class="block p-2 rounded bg-workbyte-200 text-workbyte-800">1.3 Membuat struktur database</a>
                         </div>
                     </div>
                     <div>
                         <button class="flex items-center justify-between w-full text-left p-2 rounded hover:bg-workbyte-100">
-                            <span class="text-workbyte-700">2. Komponen dan Props</span>
+                            <span class="text-workbyte-700">2. Model dan Migrasi</span>
                             <i data-feather="chevron-right" class="w-4 h-4 text-workbyte-600"></i>
                         </button>
                     </div>
                     <div>
                         <button class="flex items-center justify-between w-full text-left p-2 rounded hover:bg-workbyte-100">
-                            <span class="text-workbyte-700">3. State dan Lifecycle</span>
+                            <span class="text-workbyte-700">3. Controller dan Route</span>
                             <i data-feather="chevron-right" class="w-4 h-4 text-workbyte-600"></i>
                         </button>
                     </div>
                     <div>
                         <button class="flex items-center justify-between w-full text-left p-2 rounded hover:bg-workbyte-100">
-                            <span class="text-workbyte-700">4. Handling Events</span>
+                            <span class="text-workbyte-700">4. View dan Blade Template</span>
                             <i data-feather="chevron-right" class="w-4 h-4 text-workbyte-600"></i>
                         </button>
                     </div>
                     <div>
                         <button class="flex items-center justify-between w-full text-left p-2 rounded hover:bg-workbyte-100">
-                            <span class="text-workbyte-700">5. Hooks dan Function Components</span>
+                            <span class="text-workbyte-700">5. Autentikasi dan Otorisasi</span>
+                            <i data-feather="chevron-right" class="w-4 h-4 text-workbyte-600"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <button class="flex items-center justify-between w-full text-left p-2 rounded hover:bg-workbyte-100">
+                            <span class="text-workbyte-700">6. CRUD Operasi Berita</span>
+                            <i data-feather="chevron-right" class="w-4 h-4 text-workbyte-600"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <button class="flex items-center justify-between w-full text-left p-2 rounded hover:bg-workbyte-100">
+                            <span class="text-workbyte-700">7. Kategori dan Tag</span>
+                            <i data-feather="chevron-right" class="w-4 h-4 text-workbyte-600"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <button class="flex items-center justify-between w-full text-left p-2 rounded hover:bg-workbyte-100">
+                            <span class="text-workbyte-700">8. Komentar dan Interaksi</span>
                             <i data-feather="chevron-right" class="w-4 h-4 text-workbyte-600"></i>
                         </button>
                     </div>
@@ -122,7 +140,7 @@
         <!-- Main Course Content -->
         <main class="flex-grow p-6">
             <div class="max-w-4xl mx-auto">
-                <h1 class="text-3xl font-bold text-workbyte-800 mb-4">1.3 Membuat Aplikasi React Pertama</h1>
+                <h1 class="text-3xl font-bold text-workbyte-800 mb-4">1.3 Membuat Struktur Database Portal Berita</h1>
                 
                 <!-- Video Player -->
                 <div class="bg-black aspect-video mb-6 flex items-center justify-center">
@@ -130,7 +148,7 @@
                         <i data-feather="play" class="w-8 h-8"></i>
                     </button>
                 </div>
-
+        
                 <!-- Course Progress -->
                 <div class="bg-white p-4 rounded-lg shadow mb-6">
                     <div class="flex justify-between items-center mb-2">
@@ -141,30 +159,44 @@
                         <div class="bg-workbyte-600 h-2.5 rounded-full" style="width: 15%"></div>
                     </div>
                 </div>
-
+        
                 <!-- Lesson Content -->
                 <div class="bg-white p-6 rounded-lg shadow mb-6">
-                    <h2 class="text-2xl font-semibold text-workbyte-800 mb-4">Membuat Aplikasi React Pertama</h2>
+                    <h2 class="text-2xl font-semibold text-workbyte-800 mb-4">Membuat Struktur Database Portal Berita</h2>
                     <p class="text-gray-700 mb-4">
-                        Dalam pelajaran ini, kita akan membuat aplikasi React pertama kita. Kita akan menggunakan Create React App untuk menyiapkan lingkungan pengembangan dengan cepat dan mudah.
+                        Dalam pelajaran ini, kita akan membuat struktur database untuk portal berita kita menggunakan Laravel Migrations. Ini akan memungkinkan kita untuk mendefinisikan dan mengelola skema database dengan mudah.
                     </p>
                     <h3 class="text-xl font-semibold text-workbyte-700 mb-2">Langkah-langkah:</h3>
                     <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
-                        <li>Buka terminal atau command prompt</li>
-                        <li>Jalankan perintah: <code class="bg-gray-100 px-2 py-1 rounded">npx create-react-app my-first-app</code></li>
-                        <li>Tunggu proses instalasi selesai</li>
-                        <li>Masuk ke direktori proyek: <code class="bg-gray-100 px-2 py-1 rounded">cd my-first-app</code></li>
-                        <li>Jalankan aplikasi: <code class="bg-gray-100 px-2 py-1 rounded">npm start</code></li>
+                        <li>Buka terminal di direktori proyek Laravel Anda</li>
+                        <li>Buat migrasi untuk tabel artikel: <code class="bg-gray-100 px-2 py-1 rounded">php artisan make:migration create_articles_table</code></li>
+                        <li>Buka file migrasi yang baru dibuat di <code class="bg-gray-100 px-2 py-1 rounded">database/migrations</code></li>
+                        <li>Definisikan struktur tabel artikel dalam method <code class="bg-gray-100 px-2 py-1 rounded">up()</code></li>
+                        <li>Jalankan migrasi: <code class="bg-gray-100 px-2 py-1 rounded">php artisan migrate</code></li>
                     </ol>
                     <p class="text-gray-700 mb-4">
-                        Setelah menjalankan langkah-langkah di atas, Anda akan melihat aplikasi React default berjalan di browser Anda pada <code class="bg-gray-100 px-2 py-1 rounded">http://localhost:3000</code>.
+                        Berikut adalah contoh struktur tabel artikel yang dapat Anda gunakan:
                     </p>
+                    <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4">
+        <code class="language-php">public function up()
+        {
+            Schema::create('articles', function (Blueprint $table) {
+                $table->id();
+                $table->string('title');
+                $table->text('content');
+                $table->string('image')->nullable();
+                $table->unsignedBigInteger('user_id');
+                $table->foreign('user_id')->references('id')->on('users');
+                $table->timestamps();
+            });
+        }</code>
+                    </pre>
                     <div class="bg-workbyte-100 border-l-4 border-workbyte-600 p-4 mb-4">
                         <p class="text-workbyte-800 font-semibold">Catatan Penting:</p>
-                        <p class="text-workbyte-700">Pastikan Anda telah menginstal Node.js dan npm di komputer Anda sebelum menjalankan perintah di atas.</p>
+                        <p class="text-workbyte-700">Pastikan Anda telah mengkonfigurasi koneksi database di file <code class="bg-gray-100 px-2 py-1 rounded">.env</code> sebelum menjalankan migrasi.</p>
                     </div>
                 </div>
-
+        
                 <!-- Navigation Buttons -->
                 <div class="flex justify-between items-center">
                     <a href="#" class="bg-workbyte-100 text-workbyte-600 px-6 py-2 rounded hover:bg-workbyte-200 transition duration-300 flex items-center">
